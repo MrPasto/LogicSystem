@@ -2,6 +2,7 @@ from pygame import *
 from config import *
 from classes import Label, Rectangle
 
+
 # ФУНКЦИЯ ЗАПУСКАЕТ СТАРТОВОЕ ОКНО
 def start_screen():
     init()
@@ -28,14 +29,12 @@ def start_screen():
     x, y = 0, 0
 
     # ФОН
-    start_screen_image = transform.scale(image.load('assets/start_screen.jpg'),(WIDTH, HEIGHT))
-
+    start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
     run = True
     while run:
         screen.blit(start_screen_image, (0, 0))
         clock.tick(FPS)
-
 
         for ev in event.get():
             # ВЫКЛЮЧЕНИЕ
@@ -49,7 +48,6 @@ def start_screen():
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, BLACK, (50, 50))
         label_authors.draw_text(screen, BLACK, (WIDTH - 600, HEIGHT - 50))
-
 
         button1.draw(screen, DARK_YELLOW)
         button2.draw(screen, ORANGE)
@@ -68,5 +66,6 @@ def start_screen():
             x, y = 0, 0
 
         display.update()
+
 
 start_screen()
