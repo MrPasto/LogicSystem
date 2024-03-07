@@ -2,6 +2,7 @@ from pygame import *
 from config import *
 from classes import Label, Rectangle
 
+
 # ФУНКЦИЯ ЗАПУСКАЕТ ИГРУ 1
 
 def game_1():
@@ -32,5 +33,6 @@ def game_1():
                 x, y = ev.pos
 
         display.update()
+
 
 game_1()
