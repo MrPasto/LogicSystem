@@ -21,12 +21,14 @@ class Label:
 
 
 class Rectangle:
-    def __init__(self, x, y, x_size, y_size, pic=None, relative_cntr_x=False, relative_cntr_y=False):
+    def __init__(self, x, y, x_size, y_size, num=None, pic=None, relative_cntr_x=False, relative_cntr_y=False):
         self.x = x
         self.y = y
 
         self.rc_x = relative_cntr_x
         self.rc_y = relative_cntr_y
+
+        self.num = num
 
         if self.rc_x:
             self.x = (WIDTH // 2) + (x - (x_size // 2))
