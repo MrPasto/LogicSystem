@@ -36,6 +36,9 @@ def first():
     choice_button = Rectangle(x5, y5, sx5, sy5, relative_cntr_x=True)
     label_choice_game = Label(text='Выбрать', font_size=60, font='Times New Roman')
 
+    button_exit = Rectangle(20, HEIGHT - 70, 200, 60)
+    label_exit = Label('Назад', font_size=40, font='robo')
+
     x_click, y_click, x, y = 0, 0, 0, 0
 
     # ФОН
@@ -64,6 +67,9 @@ def first():
         label_rect.draw(screen, WHITE)
         label_choice.draw_text(screen, BLACK, (50, 50), cntr_x=True)
 
+        button_exit.draw(screen, LIGHT_GRAY)
+        label_exit.draw_text(screen, BLACK, (73, HEIGHT - 55))
+
         # ПРИ НАВЕДЕНИИ НА КНОПКУ ОНА МЕНЯЕТ ЦВЕТ
         for i, button in enumerate(buttons):
             if button.collidepoint(x, y):
@@ -83,10 +89,23 @@ def first():
                 return int(choice_string[-1])
 
         # НАЖАТИЯ ПО КНОПКАМ
+
+
         for i, but in enumerate(buttons):
             if but.collidepoint(x_click, y_click):
                 choice_string += str(i + 1)
                 x_click, y_click = 0, 0
+                button_pressed = but
+
+        try:
+            button_pressed.draw(screen, LIGHT_GREEN)
+        except UnboundLocalError:
+            ...
+        for i, button in enumerate(buttons):
+            labels_game[i].draw_text(screen, BLACK, (button.rect.x + 20, button.rect.y + 20))
+
+        if button_exit.collidepoint(x_click, y_click):
+            return 5
 
         display.update()
 

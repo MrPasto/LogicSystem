@@ -10,7 +10,7 @@ def none():
 
 def union_functions():
     choice_window1 = {0: first, 1: none, None: none}
-    choice_window3 = {1: none, 2: game_1, 3: none, 4: none, None: none}
+    choice_window3 = {1: none, 2: game_1, 3: none, 4: none, 5: union_functions, None: none}
     window1 = start_screen()
     window2 = choice_window1[window1]
     window3 = window2()
