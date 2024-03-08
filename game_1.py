@@ -35,7 +35,7 @@ def game_1():
     start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
     x, y = 0, 0
-    actually_num = 1
+    actually_num = 35
     seconds = 0
     calculate_time = False
     start_time = tm()
@@ -50,9 +50,9 @@ def game_1():
 
         current_time = tm()
         if calculate_time:
-            seconds = f'{(current_time - start_time):.2f} секунд'
+            seconds = f'{(current_time - start_time):.2f}'
             label_time.draw_text(screen, WHITE, (20, HEIGHT - 60),
-                                 cntr_x=False, text_=f"Времени прошло: {seconds}")
+                                 cntr_x=False, text_=f"Времени прошло: {seconds} секунд")
 
         for ev in event.get():
             # ВЫКЛЮЧЕНИЕ
@@ -74,14 +74,11 @@ def game_1():
                 if but.num == actually_num:
                     but.is_used = True
                     actually_num += 1
-                    print('YES')
                     but.color = LIGHT_GREEN
-                else:
-                    print('NO')
 
         # СМЕНА ЦВЕТА ПРИ НАВЕДЕНИИ НА КНОПКУ
         for but in buttons:
-            if but.collidepoint(x, y) and not (but.is_used):
+            if but.collidepoint(x, y) and not but.is_used:
                 but.color = DARK_YELLOW
             elif not but.is_used:
                 but.color = YELLOW
@@ -98,7 +95,9 @@ def game_1():
             elif 0 <= nums[but] < 10:
                 label_nums[but].draw_text(screen, BLACK, (buttons[but].x + 40, buttons[but].y + 30))
 
+        if actually_num == COUNT ** 2 + 1:
+            return seconds
+
         display.update()
 
-
-game_1()
+# game_1()
