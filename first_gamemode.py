@@ -77,22 +77,10 @@ def first():
         label_choice_game.draw_text(screen, BLACK, (100, 705), cntr_x=True)
 
         # НАЖАТИЯ ПО КНОПКАМ
-        events = key.get_pressed()
-        if b1.collidepoint(x_click, y_click):
-            print(1)
-            x_click, y_click = 0, 0
-
-        if b2.collidepoint(x_click, y_click):
-            print(2)
-            x_click, y_click = 0, 0
-
-        if b3.collidepoint(x_click, y_click):
-            print(3)
-            x_click, y_click = 0, 0
-
-        if b4.collidepoint(x_click, y_click):
-            print(4)
-            x_click, y_click = 0, 0
+        for i, but in enumerate(buttons):
+            if but.collidepoint(x_click, y_click):
+                print(i + 1)
+                x_click, y_click = 0, 0
 
         if choice_button.collidepoint(x_click, y_click):
             print(5)
