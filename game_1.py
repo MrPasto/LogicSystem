@@ -30,8 +30,11 @@ def game_1():
     # ФОН
     start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
+    x, y = 0, 0
+
     run = True
     while run:
+        x_click, y_click = 0,0
         screen.blit(start_screen_image, (0, 0))
         clock.tick(FPS)
 
@@ -39,16 +42,31 @@ def game_1():
             # ВЫКЛЮЧЕНИЕ
             if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
                 run = False
-            # ВЕРНУТЬ КООРДИНАТЫ НАЖАТИЯ МЫШКОЙ
-            if ev.type == MOUSEBUTTONDOWN and ev.button == 1:
+            # ОТСЛЕЖИВАНИЕ МЫШИ
+            if ev.type == MOUSEMOTION:
                 x, y = ev.pos
+            if ev.type == MOUSEBUTTONDOWN and ev.button == 1:
+                x_click, y_click = ev.pos
+
+
+        # ПРИ НАВЕДЕНИИ НА КНОПКУ ОНА МЕНЯЕТ ЦВЕТ
+        for i in buttons:
+            if i.collidepoint(x, y):
+                i.draw(screen, DARK_YELLOW)
+            else:
+                i.draw(screen, YELLOW)
+
+        # НАЖАТИЕ ПО КНОПКАМ
+        for i in buttons:
+            if i.collidepoint(x_click,y_click):
+                print(i.num)
+                break
 
         # ОТРИСОВКА
-        for i in buttons:
-            i.draw(screen,YELLOW)
         a = 0
         for i in range(count**2):
             label_nums[i].draw_text(screen, BLACK, (buttons[i].x + 30, buttons[i].y + 30))
+
 
 
         display.update()
