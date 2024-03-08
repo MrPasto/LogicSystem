@@ -28,7 +28,7 @@ def start_screen():
     bt1_label = Label('Выбрать игру', font_size=55, font='robo')
     bt2_label = Label('Пройти тестирование', font_size=55, font='robo')
     label_exit = Label('Выйти', font_size=40, font='robo')
-    x, y = 0, 0
+    x, y, x_pos, y_pos = 0, 0, 0, 0
 
     # ФОН
     start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
@@ -45,17 +45,31 @@ def start_screen():
             # ВЕРНУТЬ КООРДИНАТЫ НАЖАТИЯ МЫШКОЙ
             if ev.type == MOUSEBUTTONDOWN and ev.button == 1:
                 x, y = ev.pos
+            if ev.type == MOUSEMOTION:
+                x_pos, y_pos = ev.pos
 
         # ОТРИСОВКА
+        # ПРИ НАВЕДЕНИИ НА КНОПКУ ОНА МЕНЯЕТ ЦВЕТ
+        if button1.collidepoint(x_pos, y_pos):
+            button1.draw(screen, DARK_YELLOW)
+        else:
+            button1.draw(screen, YELLOW)
+
+        if button2.collidepoint(x_pos, y_pos):
+            button2.draw(screen, DARK_ORANGE)
+        else:
+            button2.draw(screen, ORANGE)
+
+        if button_exit.collidepoint(x_pos, y_pos):
+            button_exit.draw(screen, DARK_RED, color_border=GRAY)
+            label_exit.draw_text(screen, LIGHT_GRAY, (73, HEIGHT - 55))
+        else:
+            button_exit.draw(screen, RED)
+            label_exit.draw_text(screen, BLACK, (73, HEIGHT - 55))
+
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, BLACK, (50, 50))
         label_authors.draw_text(screen, BLACK, (WIDTH - 600, HEIGHT - 50))
-
-        button1.draw(screen, YELLOW)
-        button2.draw(screen, ORANGE)
-        button_exit.draw(screen, RED)
-        label_exit.draw_text(screen, BLACK, (73, HEIGHT - 55))
-
         bt1_label.draw_text(screen, BLACK, (int(button1.x + 210), int(button1.y + 80)))
         bt2_label.draw_text(screen, BLACK, (int(button2.x + 150), int(button2.y + 80)))
 

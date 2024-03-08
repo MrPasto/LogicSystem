@@ -78,6 +78,10 @@ def first():
                 button.draw(screen, YELLOW)
             labels_game[i].draw_text(screen, BLACK, (button.rect.x + 20, button.rect.y + 20))
 
+            if button_exit.collidepoint(x, y):
+                button_exit.draw(screen, GRAY)
+                label_exit.draw_text(screen, LIGHT_GRAY, (73, HEIGHT - 55))
+
         if choice_string:
             if choice_button.collidepoint(x, y):
                 choice_button.draw(screen, DARK_ORANGE)
@@ -89,7 +93,6 @@ def first():
                 return int(choice_string[-1])
 
         # НАЖАТИЯ ПО КНОПКАМ
-
 
         for i, but in enumerate(buttons):
             if but.collidepoint(x_click, y_click):
