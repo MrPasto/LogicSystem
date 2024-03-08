@@ -14,8 +14,8 @@ def game_1():
     clock = time.Clock()
 
     # ЗАГОЛОВОК
-    label_game = Label(text='Развитие логического мышления', font_size=64, font='Times New Roman')
-    label_rect = Rectangle(WIDTH // 2 - 475, 25, 950, 120)
+    label_game = Label(text='Игра на внимательность', font_size=64, font='Times New Roman')
+    label_rect = Rectangle(WIDTH // 2 - 350, 10, 700, 100)
 
     # КНОПКИ
     buttons = [Game1Button(200 + i * 95, 150 + j * 95, 100, 100) for j in range(COUNT) for i in range(COUNT)]
@@ -71,7 +71,9 @@ def game_1():
                     i.color = YELLOW
 
         # ОТРИСОВКА
-        a = 0
+        label_rect.draw(screen, WHITE)
+        label_game.draw_text(screen, BLACK, (0, 55), cntr_x=True)
+
         for i in buttons:
             i.draw(screen, i.color)
         for i in range(COUNT ** 2):
