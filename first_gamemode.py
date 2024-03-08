@@ -41,6 +41,8 @@ def first():
     # ФОН
     choose_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
+    choice_string = ''
+
     # ИГРОВОЙ ЦИКЛ
     run = True
     while run:
@@ -51,6 +53,7 @@ def first():
             # ВЫХОД
             if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
                 run = False
+                return None
             # ОТСЛЕЖИВАНИЕ МЫШИ
             if ev.type == MOUSEMOTION:
                 x, y = ev.pos
@@ -69,24 +72,22 @@ def first():
                 button.draw(screen, YELLOW)
             labels_game[i].draw_text(screen, BLACK, (button.rect.x + 20, button.rect.y + 20))
 
-        if choice_button.collidepoint(x, y):
-            choice_button.draw(screen, DARK_ORANGE)
-        else:
-            choice_button.draw(screen, ORANGE)
+        if choice_string:
+            if choice_button.collidepoint(x, y):
+                choice_button.draw(screen, DARK_ORANGE)
+            else:
+                choice_button.draw(screen, ORANGE)
+            label_choice_game.draw_text(screen, BLACK, (100, 705), cntr_x=True)
 
-        label_choice_game.draw_text(screen, BLACK, (100, 705), cntr_x=True)
+            if choice_button.collidepoint(x_click, y_click):
+                return int(choice_string[-1])
 
         # НАЖАТИЯ ПО КНОПКАМ
         for i, but in enumerate(buttons):
             if but.collidepoint(x_click, y_click):
-                print(i + 1)
+                choice_string += str(i + 1)
                 x_click, y_click = 0, 0
-
-        if choice_button.collidepoint(x_click, y_click):
-            print(5)
-            x_click, y_click = 0, 0
 
         display.update()
 
-
-first()
+# first()
