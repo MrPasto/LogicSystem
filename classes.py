@@ -3,13 +3,16 @@ from config import *
 
 
 class Label:
-    def __init__(self, text, font_size=50, font='Arial'):
+    def __init__(self, text=None, font_size=50, font='Arial'):
         self.font_size = font_size
         self.text = text
         self.font = font
 
-    def draw_text(self, screen, color, position=(0, 0), cntr_x=False):
-        text = self.text.split('/')
+    def draw_text(self, screen, color, position=(0, 0), cntr_x=False, text_=None):
+        if self.text:
+            text = self.text.split('/')
+        else:
+            text = text_.split('/')
 
         main_font = font.SysFont(self.font, self.font_size)
         for i, t in enumerate(text):
@@ -54,8 +57,8 @@ class Rectangle:
 
 
 class Game1Button(Rectangle):
-    def __int__(self, x, y, x_size, y_size, num, ussed, color=YELLOW, pic=None, relative_cntr_x=False,
-                relative_cntr_y=False):
-        self.ussed = ussed
+    def __int__(self, x, y, x_size, y_size, num, is_used, color=YELLOW, pic=None,
+                relative_cntr_x=False, relative_cntr_y=False):
+        self.is_used = is_used
         self.num = num
         self.color = color
