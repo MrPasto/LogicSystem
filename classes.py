@@ -52,9 +52,10 @@ class Rectangle:
     def collidepoint(self, x, y):
         return self.rect.collidepoint(x, y)
 
-class Game1_button(Rectangle):
-    def __int__(self, x, y, x_size, y_size, num, ussed, color = YELLOW, pic=None, relative_cntr_x=False, relative_cntr_y=False):
+
+class Game1Button(Rectangle):
+    def __int__(self, x, y, x_size, y_size, num, ussed, color=YELLOW, pic=None, relative_cntr_x=False,
+                relative_cntr_y=False):
         self.ussed = ussed
         self.num = num
         self.color = color
-

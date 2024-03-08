@@ -21,4 +21,4 @@ DARK_GREEN = (61, 140, 49)
 SCREEN_SIZE = WIDTH, HEIGHT = (1000, 800)
 
 # ИГРА 1
-count = 6 # сторона квадрата
+COUNT = 6  # сторона квадрата
