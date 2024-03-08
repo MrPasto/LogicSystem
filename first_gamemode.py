@@ -44,7 +44,7 @@ def first():
     # ИГРОВОЙ ЦИКЛ
     run = True
     while run:
-        screen.blit(choose_screen_image, (0,0))
+        screen.blit(choose_screen_image, (0, 0))
         clock.tick(FPS)
 
         for ev in event.get():
