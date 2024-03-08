@@ -87,6 +87,9 @@ def game_1():
                 but.color = YELLOW
 
         # ОТРИСОВКА
+        label_rect.draw(screen, WHITE)
+        label_game.draw_text(screen, BLACK, (0, 55), cntr_x=True)
+
         for but in buttons:
             but.draw(screen, but.color)
         for but in range(COUNT ** 2):
@@ -94,8 +97,6 @@ def game_1():
                 label_nums[but].draw_text(screen, BLACK, (buttons[but].x + 30, buttons[but].y + 30))
             elif 0 <= nums[but] < 10:
                 label_nums[but].draw_text(screen, BLACK, (buttons[but].x + 40, buttons[but].y + 30))
-        label_game.draw_text(screen, BLACK, (0, 55), cntr_x=True)
-        label_rect.draw(screen, WHITE)
 
         display.update()
 
