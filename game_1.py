@@ -16,6 +16,10 @@ def game_1():
     label_game = Label(text='Развитие логического мышления', font_size=64, font='Times New Roman')
     label_rect = Rectangle(WIDTH // 2 - 475, 25, 950, 120)
 
+    #КНОПКИ
+
+    buttons = [Rectangle(200 + i*95, 150 +j*95, 100, 100)for i in range(6) for j in range(6)]
+    
     # ФОН
     start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
@@ -31,6 +35,10 @@ def game_1():
             # ВЕРНУТЬ КООРДИНАТЫ НАЖАТИЯ МЫШКОЙ
             if ev.type == MOUSEBUTTONDOWN and ev.button == 1:
                 x, y = ev.pos
+
+        # ОТРИСОВКА
+        for i in buttons:
+            i.draw(screen,YELLOW)
 
         display.update()
 
