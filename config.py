@@ -2,7 +2,7 @@ FPS = 60
 
 DARK_PURPLE = (50, 10, 100)
 RED = (255, 0, 0)
-DARK_RED = (130, 0,0)
+DARK_RED = (130, 0, 0)
 GREEN = (0, 255, 51)
 BLUE = (0, 0, 255)
 ORANGE = (255, 123, 0)
@@ -24,3 +24,6 @@ SCREEN_SIZE = WIDTH, HEIGHT = (1000, 800)
 
 # ИГРА 1
 COUNT = 6  # сторона квадрата
+
+# ИГРА 2
+COUNT_2 = 6  # сторона квадрата
