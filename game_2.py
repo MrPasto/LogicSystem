@@ -21,12 +21,14 @@ def game_2():
 
     # КНОПКИ
     buttons = [Game1Button(200 + i * 95, 150 + j * 95, 100, 100) for j in range(COUNT_2) for i in range(COUNT_2)]
-    nums_1 = sample(range(1, ((COUNT_2 ** 2) // 2) + 1), (COUNT_2 ** 2)//2)
+    nums_1 = sample(range(1, ((COUNT_2 ** 2) // 2) + 1), (COUNT_2 ** 2) // 2)
     nums_2 = nums_1[:]
     shuffle(nums_2)
     nums_1.extend(nums_2)
-    for i in range(0, COUNT_2**2):
+    for i in range(0, COUNT_2 ** 2):
         buttons[i].num = nums_1[i]
+    for i in buttons:
+        i.is_used = False
 
     # ЦИФРЫ
     label_nums = []
@@ -68,20 +70,25 @@ def game_2():
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, BLACK, (0, 55), cntr_x=True)
+        for but in buttons:
+            if not (but.is_used):
+                but.draw(screen, YELLOW)
 
         for but in buttons:
-            but.draw(screen, YELLOW)
-        for but in range(COUNT ** 2):
-            if 10 <= nums_1[but] < 100:
-                label_nums[but].draw_text(screen, BLACK, (buttons[but].x + 30, buttons[but].y + 30))
-            elif 0 <= nums_1[but] < 10:
-                label_nums[but].draw_text(screen, BLACK, (buttons[but].x + 40, buttons[but].y + 30))
+            if but.collidepoint(x_click, y_click):
+                for lab in label_nums:
+                    if but.num == int(lab.text):
+                        lab.draw_text(screen, BLACK, (but.x + 30, but.y + 30))
+                        but.is_used = True
 
-
-        # for but in buttons:
-        #     if but.collidepoint(x_click, y_click):
-
+        for but in buttons:
+            for lab in label_nums:
+                if but.num == int(lab.text) and but.is_used:
+                    but.draw(screen, YELLOW)
+                    lab.draw_text(screen, BLACK, (but.x + 30, but.y + 30))
+                
 
         display.update()
+
 
 game_2()
