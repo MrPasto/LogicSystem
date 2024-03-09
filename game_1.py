@@ -1,6 +1,6 @@
 from pygame import *
 from config import *
-from classes import Label, Rectangle, Game1Button
+from classes import Label, Rectangle, GameButton
 from random import randint, sample
 from time import time as tm
 
@@ -20,7 +20,7 @@ def game_1():
     label_rect = Rectangle(WIDTH // 2 - 350, 10, 700, 100)
 
     # КНОПКИ
-    buttons = [Game1Button(200 + i * 95, 150 + j * 95, 100, 100) for j in range(COUNT) for i in range(COUNT)]
+    buttons = [GameButton(200 + i * 95, 150 + j * 95, 100, 100) for j in range(COUNT) for i in range(COUNT)]
     nums = sample(range(1, COUNT ** 2 + 1), COUNT ** 2)
     for but in range(COUNT ** 2):
         buttons[but].num = nums[but]

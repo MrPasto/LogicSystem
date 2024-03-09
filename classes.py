@@ -24,9 +24,12 @@ class Label:
 
 
 class Rectangle:
-    def __init__(self, x, y, x_size, y_size, pic=None, relative_cntr_x=False, relative_cntr_y=False):
+    def __init__(self, x, y, x_size, y_size, pic=None, is_radius=True, is_found=False, relative_cntr_x=False,
+                 relative_cntr_y=False):
         self.x = x
         self.y = y
+
+        self.is_found = is_found
 
         self.rc_x = relative_cntr_x
         self.rc_y = relative_cntr_y
@@ -37,7 +40,9 @@ class Rectangle:
             self.y = (HEIGHT // 2) - (y + (y_size // 2))
         self.x_size = x_size
         self.y_size = y_size
-        self.radius = int((x_size * y_size) * 0.0004)
+        self.radius = 0
+        if is_radius:
+            self.radius = int((x_size * y_size) * 0.0004)
         self.rect = Rect(self.x, self.y, self.x_size, self.y_size)
         # self.cntr_rect = Rect(WIDTH // 2 - 10, HEIGHT // 2 - 10, 20, 20)
 
@@ -56,7 +61,7 @@ class Rectangle:
         return self.rect.collidepoint(x, y)
 
 
-class Game1Button(Rectangle):
+class GameButton(Rectangle):
     def __int__(self, x, y, x_size, y_size, num, is_used, color=YELLOW, pic=None,
                 relative_cntr_x=False, relative_cntr_y=False):
         self.is_used = is_used
