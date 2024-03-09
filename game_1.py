@@ -1,7 +1,7 @@
 from pygame import *
 from config import *
 from classes import Label, Rectangle, GameButton
-from random import randint, sample
+from random import sample
 from time import time as tm
 
 
