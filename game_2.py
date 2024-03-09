@@ -1,6 +1,6 @@
 from pygame import *
 from config import *
-from classes import Label, Rectangle, Game1Button
+from classes import Label, Rectangle, GameButton
 from random import randint, sample, shuffle
 from time import time as tm
 
@@ -20,7 +20,8 @@ def game_2():
     label_rect = Rectangle(WIDTH // 2 - 350, 10, 700, 100)
 
     # КНОПКИ
-    buttons = [Game1Button(200 + i * 95, 150 + j * 95, 100, 100) for j in range(COUNT_2) for i in range(COUNT_2)]
+    buttons = [GameButton(200 + i * 100, 150 + j * 100, 100, 100, is_radius=False, is_found=False)
+               for j in range(COUNT_2) for i in range(COUNT_2)]
     nums_1 = sample(range(1, ((COUNT_2 ** 2) // 2) + 1), (COUNT_2 ** 2) // 2)
     nums_2 = nums_1[:]
     shuffle(nums_2)
@@ -43,6 +44,8 @@ def game_2():
     calculate_time = False
     start_time = tm()
     start = False
+
+    clicked_buttons = []
 
     # ИГРОВОЙ ЦИКЛ
     run = True
@@ -70,23 +73,34 @@ def game_2():
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, BLACK, (0, 55), cntr_x=True)
-        for but in buttons:
-            if not (but.is_used):
+
+        for i, but in enumerate(buttons):
+            if but.is_found:
+                but.draw(screen, LIGHT_GREEN)
+            else:
                 but.draw(screen, YELLOW)
 
-        for but in buttons:
-            if but.collidepoint(x_click, y_click):
-                for lab in label_nums:
-                    if but.num == int(lab.text):
-                        lab.draw_text(screen, BLACK, (but.x + 30, but.y + 30))
+                for label in label_nums:
+                    if but.collidepoint(x_click, y_click) and but.num == int(label.text) and not but.is_used:
                         but.is_used = True
+                        clicked_buttons.append(but.num)
+                        print(clicked_buttons)
+                        x_click, y_click = 0, 0
+                    if but.num == int(label.text) and but.is_used:
+                        if 10 <= but.num < 100:
+                            label.draw_text(screen, BLACK, (but.x + 30, but.y + 30))
+                        elif 0 <= but.num < 10:
+                            label.draw_text(screen, BLACK, (but.x + 40, but.y + 30))
 
-        for but in buttons:
-            for lab in label_nums:
-                if but.num == int(lab.text) and but.is_used:
-                    but.draw(screen, YELLOW)
-                    lab.draw_text(screen, BLACK, (but.x + 30, but.y + 30))
-                
+            # if len(clicked_buttons) == 2:
+            #     if clicked_buttons[0] == clicked_buttons[1]:
+            #         print(True)
+            #         buttons[clicked_buttons[0]].is_found = True
+            #         buttons[clicked_buttons[1]].is_found = True
+            #     else:
+            #         buttons[clicked_buttons[0]].is_used = False
+            #         buttons[clicked_buttons[1]].is_used = False
+            #     clicked_buttons.clear()
 
         display.update()
 
