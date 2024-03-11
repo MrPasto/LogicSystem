@@ -24,12 +24,14 @@ class Label:
 
 
 class Rectangle:
-    def __init__(self, x, y, x_size, y_size, pic=None, is_radius=True, is_found=False, relative_cntr_x=False,
-                 relative_cntr_y=False):
+    def __init__(self, x, y, x_size, y_size, pic=None, color_b=YELLOW, is_radius=True, is_found=False,
+                 relative_cntr_x=False, relative_cntr_y=False):
         self.x = x
         self.y = y
 
         self.is_found = is_found
+
+        self.color_b = color_b
 
         self.rc_x = relative_cntr_x
         self.rc_y = relative_cntr_y
@@ -62,8 +64,9 @@ class Rectangle:
 
 
 class GameButton(Rectangle):
-    def __int__(self, x, y, x_size, y_size, num, is_used, color=YELLOW, pic=None,
+    def __int__(self, x, y, x_size, y_size, num, is_used, is_pressed=False, color=YELLOW, pic=None,
                 relative_cntr_x=False, relative_cntr_y=False):
         self.is_used = is_used
+        self.is_pressed = is_pressed
         self.num = num
         self.color = color
