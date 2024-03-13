@@ -40,6 +40,7 @@ def game_2():
     clicked_buttons = []
     start_time = current_time = tm()
     calculate_time = False
+    wait = 0
 
     # ИГРОВОЙ ЦИКЛ
     run = True
@@ -63,6 +64,7 @@ def game_2():
             if ev.type == MOUSEBUTTONDOWN and ev.button == 1:
                 x_click, y_click = ev.pos
 
+
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, BLACK, (0, 55), cntr_x=True)
@@ -78,11 +80,14 @@ def game_2():
             elif 0 <= but.num < 10:
                 label_position = (but.x + 40, but.y + 30)
 
-            if but.collidepoint(x_click, y_click) and not but.is_found and not but.is_pressed:
+            if but.collidepoint(x_click, y_click) and not but.is_found and not but.is_pressed and len(clicked_buttons) < 2:
+                if wait <= 0:
+                    wait = tm()
                 but.is_pressed = True
                 clicked_buttons.append(but)
 
-            if len(clicked_buttons) == 2:
+            if len(clicked_buttons) == 2 and tm() - wait >= 1:
+                wait = 0
                 if clicked_buttons[0].num == clicked_buttons[1].num and \
                         clicked_buttons[0] != clicked_buttons[1]:
                     clicked_buttons[0].color_b = LIGHT_GREEN
