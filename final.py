@@ -32,7 +32,7 @@ def final_window(seconds):
             if ev.type == KEYDOWN and ev.key == K_RETURN:
                 return 'yes'
 
-        fin_label.draw_text(screen, BLACK, (-100, HEIGHT // 2 - 150), cntr_x=True)
-        again_label.draw_text(screen, GRAY, (-100, HEIGHT // 2 + 100), cntr_x=True)
+        fin_label.draw_text(screen, color=BLACK, position=(-100, HEIGHT // 2 - 150), cntr_x=True)
+        again_label.draw_text(screen, color=GRAY, position=(-100, HEIGHT // 2 + 100), cntr_x=True)
 
         display.update()
