@@ -37,6 +37,8 @@ def game_2():
     start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
     clicked_buttons = []
+    pressed_buttons = []
+    seconds = 0
     start_time = current_time = tm()
     calculate_time = False
     start = False
@@ -94,12 +96,13 @@ def game_2():
                     clicked_buttons[1].color_b = LIGHT_GREEN
                     clicked_buttons[0].is_found = True
                     clicked_buttons[1].is_found = True
+                    pressed_buttons.append(clicked_buttons[0])
+                    pressed_buttons.append(clicked_buttons[1])
                 else:
                     clicked_buttons[0].color_b = YELLOW
                     clicked_buttons[1].color_b = YELLOW
                     clicked_buttons[0].is_pressed = False
                     clicked_buttons[1].is_pressed = False
-                print(clicked_buttons[0].num, clicked_buttons[1].num)
                 clicked_buttons.clear()
 
             if but.num == int(label_nums[i].text) and but.is_pressed:
@@ -107,7 +110,8 @@ def game_2():
                     but.color_b = LIGHT_GRAY
                 label_nums[i].draw_text(screen, BLACK, label_position)
 
+        if len(pressed_buttons) == 36:
+            return seconds
         display.update()
 
-
-game_2()
+# game_2()
