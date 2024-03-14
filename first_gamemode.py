@@ -11,7 +11,7 @@ def first():
     display.set_caption('Nice game')
     clock = time.Clock()
 
-    label_rect = Rectangle(250, 5, 500, 100)
+    label_rect = Rectangle(x=250, y=5, x_size=500, y_size=100)
     label_choice = Label(text='Выберите игру', font_size=40, font='Times New Roman')
 
     labels_game = [
@@ -26,18 +26,17 @@ def first():
     x2, y2, sx2, sy2 = -150, 150, 200, 200
     x3, y3, sx3, sy3 = -150, -100, 200, 200
     x4, y4, sx4, sy4 = 150, -100, 200, 200
-    buttons = [Rectangle(x1, y1, sx1, sy1, relative_cntr_x=True, relative_cntr_y=True),
-               Rectangle(x2, y2, sx2, sy2, relative_cntr_x=True, relative_cntr_y=True),
-               Rectangle(x3, y3, sx3, sy3, relative_cntr_x=True, relative_cntr_y=True),
-               Rectangle(x4, y4, sx4, sy4, relative_cntr_x=True, relative_cntr_y=True)]
-    b1, b2, b3, b4 = buttons[0], buttons[1], buttons[2], buttons[3]
+    buttons = [Rectangle(x=x1, y=y1, x_size=sx1, y_size=sy1, relative_cntr_x=True, relative_cntr_y=True),
+               Rectangle(x=x2, y=y2, x_size=sx2, y_size=sy2, relative_cntr_x=True, relative_cntr_y=True),
+               Rectangle(x=x3, y=y3, x_size=sx3, y_size=sy3, relative_cntr_x=True, relative_cntr_y=True),
+               Rectangle(x=x4, y=y4, x_size=sx4, y_size=sy4, relative_cntr_x=True, relative_cntr_y=True)]
 
     x5, y5, sx5, sy5 = 0, 655, 250, 100
-    choice_button = Rectangle(x5, y5, sx5, sy5, relative_cntr_x=True)
+    choice_button = Rectangle(x=x5, y=y5, x_size=sx5, y_size=sy5, relative_cntr_x=True)
     label_choice_game = Label(text='Выбрать', font_size=60, font='Times New Roman')
 
-    button_exit = Rectangle(20, HEIGHT - 70, 200, 60)
-    label_exit = Label('Назад', font_size=40, font='robo')
+    button_exit = Rectangle(x=20, y=HEIGHT - 70, x_size=200, y_size=60)
+    label_exit = Label(text='Назад', font_size=40, font='robo')
 
     x_click, y_click, x, y = 0, 0, 0, 0
 
@@ -65,10 +64,10 @@ def first():
 
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
-        label_choice.draw_text(screen, BLACK, (50, 50), cntr_x=True)
+        label_choice.draw_text(screen, color=BLACK, position=(50, 50), cntr_x=True)
 
         button_exit.draw(screen, LIGHT_GRAY)
-        label_exit.draw_text(screen, BLACK, (73, HEIGHT - 55))
+        label_exit.draw_text(screen, color=BLACK, position=(73, HEIGHT - 55))
 
         # ПРИ НАВЕДЕНИИ НА КНОПКУ ОНА МЕНЯЕТ ЦВЕТ
         for i, button in enumerate(buttons):
@@ -76,24 +75,23 @@ def first():
                 button.draw(screen, DARK_YELLOW)
             else:
                 button.draw(screen, YELLOW)
-            labels_game[i].draw_text(screen, BLACK, (button.rect.x + 20, button.rect.y + 20))
+            labels_game[i].draw_text(screen, color=BLACK, position=(button.rect.x + 20, button.rect.y + 20))
 
             if button_exit.collidepoint(x, y):
                 button_exit.draw(screen, GRAY)
-                label_exit.draw_text(screen, LIGHT_GRAY, (73, HEIGHT - 55))
+                label_exit.draw_text(screen, color=LIGHT_GRAY, position=(73, HEIGHT - 55))
 
         if choice_string:
             if choice_button.collidepoint(x, y):
                 choice_button.draw(screen, DARK_ORANGE)
             else:
                 choice_button.draw(screen, ORANGE)
-            label_choice_game.draw_text(screen, BLACK, (100, 705), cntr_x=True)
+            label_choice_game.draw_text(screen, color=BLACK, position=(100, 705), cntr_x=True)
 
             if choice_button.collidepoint(x_click, y_click):
                 return int(choice_string[-1])
 
         # НАЖАТИЯ ПО КНОПКАМ
-
         for i, but in enumerate(buttons):
             if but.collidepoint(x_click, y_click):
                 choice_string += str(i + 1)
@@ -105,7 +103,7 @@ def first():
         except UnboundLocalError:
             ...
         for i, button in enumerate(buttons):
-            labels_game[i].draw_text(screen, BLACK, (button.rect.x + 20, button.rect.y + 20))
+            labels_game[i].draw_text(screen, color=BLACK, position=(button.rect.x + 20, button.rect.y + 20))
 
         if button_exit.collidepoint(x_click, y_click):
             return 5

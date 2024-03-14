@@ -16,11 +16,12 @@ def game_2():
     # ЗАГОЛОВОК
     label_time = Label(font_size=35, font='Times New Roman')
     label_game = Label(text='Игра на память', font_size=64, font='Times New Roman')
-    label_rect = Rectangle(WIDTH // 2 - 350, 10, 700, 100)
+    label_rect = Rectangle(x=(WIDTH // 2 - 350), y=10, x_size=700, y_size=100)
 
     # КНОПКИ
-    buttons = [GameButton(200 + i * 100, 130 + j * 100, 100, 100, is_radius=False, is_found=False)
-               for j in range(COUNT_2) for i in range(COUNT_2)]
+    buttons = [GameButton(
+        x=(200 + i * 100), y=(130 + j * 100), x_size=100, y_size=100, is_radius=False, is_found=False)
+        for j in range(COUNT_2) for i in range(COUNT_2)]
     nums = list(range(1, ((COUNT_2 ** 2) // 2) + 1)) * 2
     shuffle(nums)
 
@@ -54,7 +55,7 @@ def game_2():
 
         if calculate_time:
             seconds = f'{(current_time - start_time):.2f}'
-            label_time.draw_text(screen, WHITE, (20, HEIGHT - 60),
+            label_time.draw_text(screen, color=WHITE, position=(20, HEIGHT - 60),
                                  cntr_x=False, text_=f"Времени прошло: {seconds} секунд")
 
         for ev in event.get():
@@ -69,7 +70,7 @@ def game_2():
 
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
-        label_game.draw_text(screen, BLACK, (0, 55), cntr_x=True)
+        label_game.draw_text(screen, color=BLACK, position=(0, 55), cntr_x=True)
 
         for i, but in enumerate(buttons):
             but.draw(screen, but.color_b)
@@ -108,7 +109,7 @@ def game_2():
             if but.num == int(label_nums[i].text) and but.is_pressed:
                 if not but.is_found:
                     but.color_b = LIGHT_GRAY
-                label_nums[i].draw_text(screen, BLACK, label_position)
+                label_nums[i].draw_text(screen, color=BLACK, position=label_position)
 
         if len(pressed_buttons) == 36:
             return seconds
