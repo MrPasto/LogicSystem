@@ -6,7 +6,6 @@ from time import time as tm
 
 
 # ФУНКЦИЯ ЗАПУСКАЕТ ИГРУ 2
-
 def game_2():
     init()
 
@@ -20,7 +19,7 @@ def game_2():
     label_rect = Rectangle(WIDTH // 2 - 350, 10, 700, 100)
 
     # КНОПКИ
-    buttons = [GameButton(200 + i * 100, 150 + j * 100, 100, 100, is_radius=False, is_found=False)
+    buttons = [GameButton(200 + i * 100, 130 + j * 100, 100, 100, is_radius=False, is_found=False)
                for j in range(COUNT_2) for i in range(COUNT_2)]
     nums = list(range(1, ((COUNT_2 ** 2) // 2) + 1)) * 2
     shuffle(nums)
@@ -40,6 +39,7 @@ def game_2():
     clicked_buttons = []
     start_time = current_time = tm()
     calculate_time = False
+    start = False
     wait = 0
 
     # ИГРОВОЙ ЦИКЛ
@@ -48,6 +48,7 @@ def game_2():
         x_click, y_click = 0, 0
         screen.blit(start_screen_image, (0, 0))
         clock.tick(FPS)
+        current_time = tm()
 
         if calculate_time:
             seconds = f'{(current_time - start_time):.2f}'
@@ -64,15 +65,11 @@ def game_2():
             if ev.type == MOUSEBUTTONDOWN and ev.button == 1:
                 x_click, y_click = ev.pos
 
-
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, BLACK, (0, 55), cntr_x=True)
 
         for i, but in enumerate(buttons):
-            # if current_time - start_time >= 1:
-            #     if but.is_pressed and not but.is_found:
-            #         but.color_b = YELLOW
             but.draw(screen, but.color_b)
 
             if 10 <= but.num < 100:
@@ -80,13 +77,16 @@ def game_2():
             elif 0 <= but.num < 10:
                 label_position = (but.x + 40, but.y + 30)
 
-            if but.collidepoint(x_click, y_click) and not but.is_found and not but.is_pressed and len(clicked_buttons) < 2:
-                if wait <= 0:
+            if but.collidepoint(x_click, y_click) and not but.is_found and \
+                    not but.is_pressed and len(clicked_buttons) < 2:
+                if not start:
+                    calculate_time = start = True
+                if wait <= 0 and len(clicked_buttons) == 1:
                     wait = tm()
                 but.is_pressed = True
                 clicked_buttons.append(but)
 
-            if len(clicked_buttons) == 2 and tm() - wait >= 1:
+            if len(clicked_buttons) == 2 and tm() - wait >= 0.6:
                 wait = 0
                 if clicked_buttons[0].num == clicked_buttons[1].num and \
                         clicked_buttons[0] != clicked_buttons[1]:
