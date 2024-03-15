@@ -15,9 +15,9 @@ def first():
     label_choice = Label(text='Выберите игру', font_size=40, font='Times New Roman')
 
     labels_game = [
-        Label(text='Игра на/память', font_size=50, font='robo'),
-        Label(text='Игра на/внимате-/льность', font_size=50, font='robo'),
-        Label(text='Игра на ...', font_size=50, font='robo'),
+        Label(text='Игра на//память', font_size=50, font='robo'),
+        Label(text='Игра на//внимате-//льность', font_size=50, font='robo'),
+        Label(text='Игра на//устный//счёт', font_size=50, font='robo'),
         Label(text='Игра на ...', font_size=50, font='robo'),
     ]
 
@@ -64,7 +64,7 @@ def first():
 
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
-        label_choice.draw_text(screen, color=BLACK, position=(50, 50), cntr_x=True)
+        label_choice.draw_text(screen, color=BLACK, position=(0, 50), cntr_x=True)
 
         button_exit.draw(screen, LIGHT_GRAY)
         label_exit.draw_text(screen, color=BLACK, position=(73, HEIGHT - 55))
@@ -86,7 +86,7 @@ def first():
                 choice_button.draw(screen, DARK_ORANGE)
             else:
                 choice_button.draw(screen, ORANGE)
-            label_choice_game.draw_text(screen, color=BLACK, position=(100, 705), cntr_x=True)
+            label_choice_game.draw_text(screen, color=BLACK, position=(0, 705), cntr_x=True)
 
             if choice_button.collidepoint(x_click, y_click):
                 return int(choice_string[-1])

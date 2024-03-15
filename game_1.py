@@ -52,7 +52,7 @@ def game_1():
         current_time = tm()
         if calculate_time:
             seconds = f'{(current_time - start_time):.2f}'
-            label_time.draw_text(screen, color=WHITE, position=(20, HEIGHT - 60),
+            label_time.draw_text(screen, color=WHITE, position=(0, HEIGHT - 60),
                                  cntr_x=False, text_=f"Времени прошло: {seconds} секунд")
 
         for ev in event.get():

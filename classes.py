@@ -10,9 +10,9 @@ class Label:
 
     def draw_text(self, screen, color, position=(0, 0), cntr_x=False, text_=None):
         if self.text:
-            text = self.text.split('/')
+            text = self.text.split('//')
         else:
-            text = text_.split('/')
+            text = text_.split('//')
 
         main_font = font.SysFont(self.font, self.font_size)
         for i, t in enumerate(text):
