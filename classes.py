@@ -18,7 +18,7 @@ class Label:
         for i, t in enumerate(text):
             caption = main_font.render(t, True, color)
             if cntr_x:
-                screen.blit(caption, caption.get_rect(center=(WIDTH // 2, position[1] + i * 50)))
+                screen.blit(caption, caption.get_rect(center=(WIDTH // 2 + position[0], position[1] + i * 50)))
             else:
                 screen.blit(caption, (position[0], position[1] + i * 50))
 
