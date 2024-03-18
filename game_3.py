@@ -23,7 +23,7 @@ def game_3():
     label_rect = Rectangle(x=(WIDTH // 2 - 350), y=10, x_size=700, y_size=100)
 
     # ДОСКА
-    board = Rectangle(x=0, y=150, x_size=650, y_size=250, relative_cntr_x=True)
+    board = Rectangle(x=0, y=150, x_size=750, y_size=250, relative_cntr_x=True)
 
     # ФОН
     start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
@@ -51,25 +51,29 @@ def game_3():
                                 text_=f'Количество очков: {points_count}/{COUNT_3}')
 
         if is_decided and current_time - last_click_time >= 0.7:
+            write_answer = False
             any_but_pressed = False
             nums: list = sorted([randint(1, 100), randint(1, 100)], reverse=True)
             signs: list = ['+', '-']
             current_sign: str = signs[randint(0, 1)]
-            expression: Label = Label(text=f'{nums[0]} {current_sign} {nums[1]} = ', font_size=100, font='Arial')
+            expression: Label = Label(text=f'{nums[0]} {current_sign} {nums[1]} = ', font_size=100, font='Times New Roman')
             answer: int = eval(f'{nums[0]}{current_sign}{nums[1]}')
+            true_answer_text = Label(text=f'{answer}', font_size=100, font='Times New Roman')
             if answer < 11:
                 variants: list = [answer, answer + randint(1, 7), answer + randint(1, 5), answer + randint(1, 10)]
             else:
                 variants: list = [answer, answer + randint(1, 7), answer - randint(1, 5), answer - randint(1, 10)]
             shuffle(variants)
             buttons: list = [
-                GameButton(x=(150 + i * 180), y=500, x_size=180, y_size=180, is_radius=False, is_found=False)
+                GameButton(x=(140 + i * 180), y=500, x_size=180, y_size=180, is_radius=False, is_found=False)
                 for i in range(4)]
 
             for i, button in enumerate(buttons):
                 button.num = variants[i]
 
-            text_answers = [Label(text=f'{i}', font_size=80, font='Arial') for i in variants]
+
+
+            text_answers = [Label(text=f'{i}', font_size=80, font='Times New Roman') for i in variants]
             is_decided = False
             if points_count >= COUNT_3:
                 win = True
@@ -88,8 +92,8 @@ def game_3():
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, color=BLACK, position=(0, 55), cntr_x=True)
 
-        board.draw(screen, DARK_GREEN)
-        expression.draw_text(screen, color=WHITE, position=(-100, 270), cntr_x=True)
+        board.draw(screen, SCHOOL_BOARD_COLOR, color_border=BROWN)
+        expression.draw_text(screen, color=WHITE, position=(220, 225))
 
         for i, but in enumerate(buttons):
             if not but.is_found:
@@ -100,6 +104,7 @@ def game_3():
 
         for i, but in enumerate(buttons):
             if but.collidepoint(x_click, y_click) and not any_but_pressed:
+                write_answer = True
                 any_but_pressed = True
                 if answer == but.num:
                     points_count += 1
@@ -113,7 +118,17 @@ def game_3():
 
         for i, but in enumerate(buttons):
             but.draw(screen, but.color_b)
-            text_answers[i].draw_text(screen, BLACK, (but.x + 40, but.y + 40))
+
+            if 100 <= but.num < 1000:
+                label_position = (but.x + 27.5, but.y + 45)
+            elif 10 <= but.num < 100:
+                label_position = (but.x + 50, but.y + 45)
+            elif 0 <= but.num < 10:
+                label_position = (but.x + 70, but.y + 45)
+            text_answers[i].draw_text(screen, BLACK, label_position)
+
+        if write_answer:
+            true_answer_text.draw_text(screen, LIGHT_GREEN, position=(600, 225))
 
         if points_count < 0:
             points_count = 0
