@@ -34,6 +34,7 @@ def game_3():
     start_time = tm()
     last_click_time: int = 0
     win = False
+    any_but_pressed = False
     # ИГРОВОЙ ЦИКЛ
     run = True
     while run:
@@ -50,6 +51,7 @@ def game_3():
                                 text_=f'Количество очков: {points_count}/{COUNT_3}')
 
         if is_decided and current_time - last_click_time >= 0.7:
+            any_but_pressed = False
             nums: list = sorted([randint(1, 100), randint(1, 100)], reverse=True)
             signs: list = ['+', '-']
             current_sign: str = signs[randint(0, 1)]
@@ -97,7 +99,8 @@ def game_3():
                     but.color_b = YELLOW
 
         for i, but in enumerate(buttons):
-            if but.collidepoint(x_click, y_click):
+            if but.collidepoint(x_click, y_click) and not any_but_pressed:
+                any_but_pressed = True
                 if answer == but.num:
                     points_count += 1
                     but.color_b = LIGHT_GREEN
