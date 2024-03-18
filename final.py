@@ -10,7 +10,7 @@ def final_window(seconds):
     display.set_caption('Nice game')
     clock = time.Clock()
 
-    fin_label = Label(text=f'Поздравляем!//Ты справился за {seconds} секунд!', font_size=70,
+    fin_label = Label(text=f'Поздравляем!////Ты справился за {seconds} секунд!', font_size=70,
                       font='times new roman')
 
     again_label = Label(text='Нажмите "Enter", чтобы продолжить', font_size=50,

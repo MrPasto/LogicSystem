@@ -50,15 +50,16 @@ def game_3():
         label_counter.draw_text(screen, color=WHITE, position=(WIDTH - 370, HEIGHT - 60),
                                 text_=f'Количество очков: {points_count}/{COUNT_3}')
 
-        if is_decided and current_time - last_click_time >= 0.7:
-            write_answer = False
+        if is_decided and current_time - last_click_time >= 0.8:
             any_but_pressed = False
+            color_expression = WHITE
             nums: list = sorted([randint(1, 100), randint(1, 100)], reverse=True)
             signs: list = ['+', '-']
             current_sign: str = signs[randint(0, 1)]
-            expression: Label = Label(text=f'{nums[0]} {current_sign} {nums[1]} = ', font_size=100, font='Times New Roman')
+            expression: Label = Label(text=f'{nums[0]} {current_sign} {nums[1]} = ', font_size=100,
+                                      font='Times New Roman')
             answer: int = eval(f'{nums[0]}{current_sign}{nums[1]}')
-            true_answer_text = Label(text=f'{answer}', font_size=100, font='Times New Roman')
+            true_answer_text: str = ''
             if answer < 11:
                 variants: list = [answer, answer + randint(1, 7), answer + randint(1, 5), answer + randint(1, 10)]
             else:
@@ -70,8 +71,6 @@ def game_3():
 
             for i, button in enumerate(buttons):
                 button.num = variants[i]
-
-
 
             text_answers = [Label(text=f'{i}', font_size=80, font='Times New Roman') for i in variants]
             is_decided = False
@@ -92,9 +91,6 @@ def game_3():
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, color=BLACK, position=(0, 55), cntr_x=True)
 
-        board.draw(screen, SCHOOL_BOARD_COLOR, color_border=BROWN)
-        expression.draw_text(screen, color=WHITE, position=(220, 225))
-
         for i, but in enumerate(buttons):
             if not but.is_found:
                 if but.collidepoint(x, y):
@@ -104,7 +100,8 @@ def game_3():
 
         for i, but in enumerate(buttons):
             if but.collidepoint(x_click, y_click) and not any_but_pressed:
-                write_answer = True
+                true_answer_text = str(eval(f'{nums[0]}{current_sign}{nums[1]}'))
+                color_expression = LIGHT_GREEN
                 any_but_pressed = True
                 if answer == but.num:
                     points_count += 1
@@ -127,8 +124,9 @@ def game_3():
                 label_position = (but.x + 70, but.y + 45)
             text_answers[i].draw_text(screen, BLACK, label_position)
 
-        if write_answer:
-            true_answer_text.draw_text(screen, LIGHT_GREEN, position=(600, 225))
+        board.draw(screen, SCHOOL_BOARD_COLOR, color_border=BROWN)
+        expression.draw_text(screen, color=color_expression, position=(205, 218),
+                             text_=f'{nums[0]} {current_sign} {nums[1]} = {true_answer_text}')
 
         if points_count < 0:
             points_count = 0

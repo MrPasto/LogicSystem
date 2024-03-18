@@ -11,7 +11,7 @@ class Label:
     def draw_text(self, screen, color, position=(0, 0), cntr_x=False, text_=None):
         if self.text:
             text = self.text.split('//')
-        else:
+        if text_:
             text = text_.split('//')
 
         main_font = font.SysFont(self.font, self.font_size)
