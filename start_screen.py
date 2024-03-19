@@ -12,7 +12,7 @@ def start_screen():
     clock = time.Clock()
 
     # ЗАГОЛОВОК
-    label_game = Label(text='Тренажор логического мышления', font_size=64, font='Times New Roman')
+    label_game = Label(text='Тренажер логического мышления', font_size=64, font='Times New Roman')
     label_rect = Rectangle(x=(WIDTH // 2 - 470), y=25, x_size=950, y_size=120)
 
     # АВТОРЫ
