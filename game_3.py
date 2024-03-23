@@ -53,9 +53,12 @@ def game_3():
         if is_decided and current_time - last_click_time >= 0.8:
             any_but_pressed = False
             color_expression = WHITE
-            nums: list = sorted([randint(1, 100), randint(1, 100)], reverse=True)
-            signs: list = ['+', '-']
-            current_sign: str = signs[randint(0, 1)]
+            signs: list = ['+', '-', '*']
+            current_sign: str = signs[randint(0, 2)]
+            if current_sign == '*':
+                nums: list = [randint(1, 25), randint(0, 3)]
+            else:
+                nums: list = sorted([randint(1, 100), randint(1, 100)], reverse=True)
             expression: Label = Label(text=f'{nums[0]} {current_sign} {nums[1]} = ', font_size=100,
                                       font='Times New Roman')
             answer: int = eval(f'{nums[0]}{current_sign}{nums[1]}')
