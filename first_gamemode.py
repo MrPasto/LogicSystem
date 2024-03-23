@@ -12,13 +12,13 @@ def first():
     clock = time.Clock()
 
     label_rect = Rectangle(x=250, y=5, x_size=500, y_size=100)
-    label_choice = Label(text='Выберите игру', font_size=40, font='Times New Roman')
+    label_choice = Label(text='Выберите игру', font_size=70, font_='robo')
 
     labels_game = [
-        Label(text='Игра на//память', font_size=50, font='robo'),
-        Label(text='Игра на//внимате-//льность', font_size=50, font='robo'),
-        Label(text='Игра на//устный//счёт', font_size=50, font='robo'),
-        Label(text='Игра на ...', font_size=50, font='robo'),
+        Label(text='Игра на//память', font_size=50, font_='robo'),
+        Label(text='Игра на//внимате-//льность', font_size=50, font_='robo'),
+        Label(text='Игра на//устный//счёт', font_size=50, font_='robo'),
+        Label(text='Игра на ...', font_size=50, font_='robo'),
     ]
 
     # КНОПКИ
@@ -33,10 +33,10 @@ def first():
 
     x5, y5, sx5, sy5 = 0, 655, 250, 100
     choice_button = Rectangle(x=x5, y=y5, x_size=sx5, y_size=sy5, relative_cntr_x=True)
-    label_choice_game = Label(text='Выбрать', font_size=60, font='Times New Roman')
+    label_choice_game = Label(text='Выбрать', font_size=60, font_='robo')
 
     button_exit = Rectangle(x=20, y=HEIGHT - 70, x_size=200, y_size=60)
-    label_exit = Label(text='Назад', font_size=40, font='robo')
+    label_exit = Label(text='Назад', font_size=40, font_='robo')
 
     x_click, y_click, x, y = 0, 0, 0, 0
 
@@ -54,7 +54,6 @@ def first():
         for ev in event.get():
             # ВЫХОД
             if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
-                run = False
                 return None
             # ОТСЛЕЖИВАНИЕ МЫШИ
             if ev.type == MOUSEMOTION:
@@ -64,10 +63,10 @@ def first():
 
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
-        label_choice.draw_text(screen, color=BLACK, position=(0, 50), cntr_x=True)
+        label_choice.draw_text(screen, color_=BLACK, position=(0, 55), cntr_x=True)
 
         button_exit.draw(screen, LIGHT_GRAY)
-        label_exit.draw_text(screen, color=BLACK, position=(73, HEIGHT - 55))
+        label_exit.draw_text(screen, color_=BLACK, position=(73, HEIGHT - 55))
 
         # ПРИ НАВЕДЕНИИ НА КНОПКУ ОНА МЕНЯЕТ ЦВЕТ
         for i, button in enumerate(buttons):
@@ -75,18 +74,18 @@ def first():
                 button.draw(screen, DARK_YELLOW)
             else:
                 button.draw(screen, YELLOW)
-            labels_game[i].draw_text(screen, color=BLACK, position=(button.rect.x + 20, button.rect.y + 20))
+            labels_game[i].draw_text(screen, color_=BLACK, position=(button.rect.x + 20, button.rect.y + 20))
 
             if button_exit.collidepoint(x, y):
                 button_exit.draw(screen, GRAY)
-                label_exit.draw_text(screen, color=LIGHT_GRAY, position=(73, HEIGHT - 55))
+                label_exit.draw_text(screen, color_=LIGHT_GRAY, position=(73, HEIGHT - 55))
 
         if choice_string:
             if choice_button.collidepoint(x, y):
                 choice_button.draw(screen, DARK_ORANGE)
             else:
                 choice_button.draw(screen, ORANGE)
-            label_choice_game.draw_text(screen, color=BLACK, position=(0, 705), cntr_x=True)
+            label_choice_game.draw_text(screen, color_=BLACK, position=(0, 705), cntr_x=True)
 
             if choice_button.collidepoint(x_click, y_click):
                 return int(choice_string[-1])
@@ -103,7 +102,7 @@ def first():
         except UnboundLocalError:
             ...
         for i, button in enumerate(buttons):
-            labels_game[i].draw_text(screen, color=BLACK, position=(button.rect.x + 20, button.rect.y + 20))
+            labels_game[i].draw_text(screen, color_=BLACK, position=(button.rect.x + 20, button.rect.y + 20))
 
         if button_exit.collidepoint(x_click, y_click):
             return 5

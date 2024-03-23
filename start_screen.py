@@ -12,11 +12,12 @@ def start_screen():
     clock = time.Clock()
 
     # ЗАГОЛОВОК
-    label_game = Label(text='Тренажер логического мышления', font_size=64, font='Times New Roman')
+    label_game = Label(text='Тренажер логического мышления', font_size=70, font_='Arial Narrow')
     label_rect = Rectangle(x=(WIDTH // 2 - 470), y=25, x_size=950, y_size=120)
 
     # АВТОРЫ
-    label_authors = Label(text='Создатели проекта: Денисов А., Касьянов К.', font_size=30, font='Times New Roman')
+    label_authors = Label(text='Создатели проекта: Денисов А., Касьянов К.',
+                          font_size=40, font_='Arial Narrow', italiano=True)
 
     # КНОПКИ ВЫБРАТЬ ИГРУ и ПРОЙТИ ТЕСТИРОВАНИЕ
     x1, y1, sx1, sy1 = WIDTH // 2 - 350, 180, 700, 200
@@ -25,9 +26,9 @@ def start_screen():
     button2 = Rectangle(x=x2, y=y2, x_size=sx2, y_size=sy2)
     button_exit = Rectangle(x=20, y=(HEIGHT - 70), x_size=200, y_size=60)
 
-    bt1_label = Label(text='Выбрать игру', font_size=55, font='robo')
-    bt2_label = Label(text='Пройти тестирование', font_size=55, font='robo')
-    label_exit = Label(text='Выйти', font_size=40, font='robo')
+    bt1_label = Label(text='Выбрать игру', font_size=85, font_='Arial Narrow')
+    bt2_label = Label(text='Пройти тестирование', font_size=85, font_='Arial Narrow')
+    label_exit = Label(text='Выйти', font_size=40, font_='Arial Narrow')
     x, y, x_pos, y_pos = 0, 0, 0, 0
 
     # ФОН
@@ -62,19 +63,18 @@ def start_screen():
 
         if button_exit.collidepoint(x_pos, y_pos):
             button_exit.draw(screen, DARK_RED, color_border=GRAY)
-            label_exit.draw_text(screen, color=LIGHT_GRAY, position=(73, HEIGHT - 55))
+            label_exit.draw_text(screen, color_=LIGHT_GRAY, position=(73, HEIGHT - 55))
         else:
             button_exit.draw(screen, RED)
-            label_exit.draw_text(screen, color=BLACK, position=(73, HEIGHT - 55))
+            label_exit.draw_text(screen, color_=BLACK, position=(73, HEIGHT - 55))
 
         label_rect.draw(screen, WHITE)
-        label_game.draw_text(screen, color=BLACK, position=(50, 50))
-        label_authors.draw_text(screen, color=BLACK, position=(WIDTH - 600, HEIGHT - 50))
-        bt1_label.draw_text(screen, color=BLACK, position=(int(button1.x + 210), int(button1.y + 80)))
-        bt2_label.draw_text(screen, color=BLACK, position=(int(button2.x + 150), int(button2.y + 80)))
+        label_game.draw_text(screen, color_=BLACK, position=(0, 85), cntr_x=True)
+        label_authors.draw_text(screen, color_=BLACK, position=(WIDTH - 650, HEIGHT - 50))
+        bt1_label.draw_text(screen, color_=BLACK, position=(0, 275), cntr_x=True)
+        bt2_label.draw_text(screen, color_=BLACK, position=(0, 535), cntr_x=True)
 
         # НАЖАТИЯ ПО КНОПКАМ
-        events = key.get_pressed()
         if button1.collidepoint(x, y):
             return 0
 

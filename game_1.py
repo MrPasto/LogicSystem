@@ -15,8 +15,8 @@ def game_1():
     clock = time.Clock()
 
     # ЗАГОЛОВОК
-    label_time = Label(font_size=35, font='Times New Roman')
-    label_game = Label(text='Игра на внимательность', font_size=64, font='Times New Roman')
+    label_time = Label(font_size=50, font_='robo')
+    label_game = Label(text='Игра на внимательность', font_size=70, font_='robo')
     label_rect = Rectangle(x=(WIDTH // 2 - 350), y=10, x_size=700, y_size=100)
 
     # КНОПКИ
@@ -30,7 +30,7 @@ def game_1():
     # ЦИФРЫ
     label_nums = []
     for but in buttons:
-        label_nums.append(Label(text=f'{but.num}', font_size=40, font='Times New Roman'))
+        label_nums.append(Label(text=f'{but.num}', font_size=60, font_='robo'))
 
     # ФОН
     start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
@@ -52,7 +52,7 @@ def game_1():
         current_time = tm()
         if calculate_time:
             seconds = f'{(current_time - start_time):.2f}'
-            label_time.draw_text(screen, color=WHITE, position=(0, HEIGHT - 60),
+            label_time.draw_text(screen, color_=WHITE, position=(20, HEIGHT - 60),
                                  cntr_x=False, text_=f"Времени прошло: {seconds} секунд")
 
         for ev in event.get():
@@ -86,15 +86,15 @@ def game_1():
 
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
-        label_game.draw_text(screen, color=BLACK, position=(0, 55), cntr_x=True)
+        label_game.draw_text(screen, color_=BLACK, position=(0, 60), cntr_x=True)
 
         for but in buttons:
             but.draw(screen, but.color)
         for but in range(COUNT ** 2):
             if 10 <= nums[but] < 100:
-                label_nums[but].draw_text(screen, color=BLACK, position=(buttons[but].x + 30, buttons[but].y + 30))
+                label_nums[but].draw_text(screen, color_=BLACK, position=(buttons[but].x + 25, buttons[but].y + 32.5))
             elif 0 <= nums[but] < 10:
-                label_nums[but].draw_text(screen, color=BLACK, position=(buttons[but].x + 40, buttons[but].y + 30))
+                label_nums[but].draw_text(screen, color_=BLACK, position=(buttons[but].x + 40, buttons[but].y + 32.5))
 
         if actually_num == COUNT ** 2 + 1:
             return seconds

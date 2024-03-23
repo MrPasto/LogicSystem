@@ -14,8 +14,8 @@ def game_2():
     clock = time.Clock()
 
     # ЗАГОЛОВОК
-    label_time = Label(font_size=35, font='Times New Roman')
-    label_game = Label(text='Игра на память', font_size=64, font='Times New Roman')
+    label_time = Label(font_size=50, font_='robo')
+    label_game = Label(text='Игра на память', font_size=70, font_='robo')
     label_rect = Rectangle(x=(WIDTH // 2 - 350), y=10, x_size=700, y_size=100)
 
     # КНОПКИ
@@ -32,7 +32,7 @@ def game_2():
     # ЦИФРЫ
     label_nums = []
     for but in buttons:
-        label_nums.append(Label(text=f'{but.num}', font_size=40, font='Times New Roman'))
+        label_nums.append(Label(text=f'{but.num}', font_size=60, font_='robo'))
 
     # ФОН
     start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
@@ -40,11 +40,10 @@ def game_2():
     clicked_buttons = []
     pressed_buttons = []
     seconds = 0
-    start_time = current_time = tm()
+    start_time = tm()
     calculate_time = False
     start = False
     wait = 0
-
     # ИГРОВОЙ ЦИКЛ
     run = True
     while run:
@@ -55,7 +54,7 @@ def game_2():
 
         if calculate_time:
             seconds = f'{(current_time - start_time):.2f}'
-            label_time.draw_text(screen, color=WHITE, position=(20, HEIGHT - 60),
+            label_time.draw_text(screen, color_=WHITE, position=(20, HEIGHT - 60),
                                  cntr_x=False, text_=f"Времени прошло: {seconds} секунд")
 
         for ev in event.get():
@@ -63,20 +62,18 @@ def game_2():
             if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
                 run = False
             # ОТСЛЕЖИВАНИЕ МЫШИ
-            if ev.type == MOUSEMOTION:
-                x, y = ev.pos
             if ev.type == MOUSEBUTTONDOWN and ev.button == 1:
                 x_click, y_click = ev.pos
 
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
-        label_game.draw_text(screen, color=BLACK, position=(0, 55), cntr_x=True)
+        label_game.draw_text(screen, color_=BLACK, position=(0, 60), cntr_x=True)
 
         for i, but in enumerate(buttons):
             but.draw(screen, but.color_b)
-
+            label_position = 0, 0
             if 10 <= but.num < 100:
-                label_position = (but.x + 30, but.y + 30)
+                label_position = (but.x + 25, but.y + 30)
             elif 0 <= but.num < 10:
                 label_position = (but.x + 40, but.y + 30)
 
@@ -109,7 +106,7 @@ def game_2():
             if but.num == int(label_nums[i].text) and but.is_pressed:
                 if not but.is_found:
                     but.color_b = LIGHT_GRAY
-                label_nums[i].draw_text(screen, color=BLACK, position=label_position)
+                label_nums[i].draw_text(screen, color_=BLACK, position=label_position)
 
         if len(pressed_buttons) == 36:
             return seconds
