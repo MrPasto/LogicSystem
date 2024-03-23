@@ -3,20 +3,22 @@ from config import *
 
 
 class Label:
-    def __init__(self, text=None, font_size=50, font='Arial'):
+    def __init__(self, text=None, font_size=50, font_='Arial', italiano=False):
         self.font_size = font_size
         self.text = text
-        self.font = font
+        self.font = font_
+        self.italiano = italiano
 
-    def draw_text(self, screen, color, position=(0, 0), cntr_x=False, text_=None):
+    def draw_text(self, screen, color_, position=(0, 0), cntr_x=False, text_=None):
+        text: str = ''
         if self.text:
             text = self.text.split('//')
         if text_:
             text = text_.split('//')
 
-        main_font = font.SysFont(self.font, self.font_size)
+        main_font = font.SysFont(self.font, self.font_size, italic=self.italiano)
         for i, t in enumerate(text):
-            caption = main_font.render(t, True, color)
+            caption = main_font.render(t, True, color_)
             if cntr_x:
                 screen.blit(caption, caption.get_rect(center=(WIDTH // 2 + position[0], position[1] + i * 50)))
             else:
@@ -52,11 +54,11 @@ class Rectangle:
         if self.picture:
             self.picture = transform.scale(image.load(self.picture), self.x_size, self.y_size)
 
-    def draw(self, screen, color, color_border=BLACK):
+    def draw(self, screen, color_, color_border=BLACK):
         if self.picture:
             screen.blit(self.picture, (self.rect.x, self.rect.y))
         else:
-            draw.rect(screen, color, self.rect, 0, self.radius)
+            draw.rect(screen, color_, self.rect, 0, self.radius)
             draw.rect(screen, color_border, self.rect, 10, self.radius)
 
     def collidepoint(self, x, y):
@@ -64,9 +66,9 @@ class Rectangle:
 
 
 class GameButton(Rectangle):
-    def __int__(self, x, y, x_size, y_size, num, is_used, is_pressed=False, color=YELLOW, pic=None,
+    def __int__(self, x, y, x_size, y_size, num, is_used, is_pressed=False, color_=YELLOW, pic=None,
                 relative_cntr_x=False, relative_cntr_y=False):
         self.is_used = is_used
         self.is_pressed = is_pressed
         self.num = num
-        self.color = color
+        self.color = color_
