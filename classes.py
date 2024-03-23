@@ -3,7 +3,8 @@ from config import *
 
 
 class Label:
-    def __init__(self, text=None, font_size=50, font_='Arial', italiano=False):
+    def __init__(self, text=None, rect_=None, font_size=50, font_='Arial', italiano=False):
+        self.rect_ = rect_
         self.font_size = font_size
         self.text = text
         self.font = font_
@@ -19,10 +20,19 @@ class Label:
         main_font = font.SysFont(self.font, self.font_size, italic=self.italiano)
         for i, t in enumerate(text):
             caption = main_font.render(t, True, color_)
-            if cntr_x:
-                screen.blit(caption, caption.get_rect(center=(WIDTH // 2 + position[0], position[1] + i * 50)))
+
+            if self.rect_:
+                if cntr_x:
+                    pos = caption.get_rect(center=(self.rect_.x + self.rect_.x_size // 2,
+                                                   (self.rect_.y + self.rect_.y_size // (2 * len(text))) + i * 50))
+                else:
+                    pos = (self.rect_.x + 20, self.rect_.y + i * 50 + 15)
             else:
-                screen.blit(caption, (position[0], position[1] + i * 50))
+                if cntr_x:
+                    pos = caption.get_rect(center=(WIDTH // 2 + position[0], position[1] + i * 50))
+                else:
+                    pos = (position[0], position[1] + i * 50)
+            screen.blit(caption, pos)
 
 
 class Rectangle:
