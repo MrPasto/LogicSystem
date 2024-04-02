@@ -1,4 +1,4 @@
-from union import main
+from LogicSystem.core.union import main
 
 if __name__ == '__main__':
     main()

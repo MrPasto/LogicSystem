@@ -1,7 +1,7 @@
 from pygame import *
-from config import *
-from classes import Label, Rectangle
-from games import game_1, game_2, game_3
+from LogicSystem.core.config import *
+from LogicSystem.core.classes import Label, Rectangle
+from LogicSystem.core.games import game_1, game_2, game_3
 
 
 # ФУНКЦИЯ ЗАПУСКАЕТ МЕНЮ ВЫБОРА ИГРЫ
@@ -39,7 +39,7 @@ def first():
     x_click, y_click, x, y = 0, 0, 0, 0
 
     # ФОН
-    choose_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
+    choose_screen_image = transform.scale(image.load('./assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
     choice_string = ''
 
