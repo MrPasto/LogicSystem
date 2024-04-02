@@ -1,8 +1,8 @@
 from pygame import *
-from config import *
-from classes import Label, Rectangle, GameButton
 from random import sample, shuffle, randint
 from time import time as tm
+from LogicSystem.core.config import *
+from LogicSystem.core.classes import Label, Rectangle, GameButton
 
 cheats = False
 
@@ -34,7 +34,7 @@ def game_1():
         label_nums.append(Label(text=f'{but.num}', font_size=60, font_='robo'))
 
     # ФОН
-    start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
+    start_screen_image = transform.scale(image.load('./assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
     x, y = 0, 0
     actually_num = 35 if cheats else 1
@@ -136,7 +136,7 @@ def game_2():
         label_nums.append(Label(text=f'{but.num}', font_size=60, font_='robo'))
 
     # ФОН
-    start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
+    start_screen_image = transform.scale(image.load('./assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
     clicked_buttons = []
     pressed_buttons = []
@@ -236,7 +236,7 @@ def game_3():
     board = Rectangle(x=0, y=150, x_size=750, y_size=250, relative_cntr_x=True)
 
     # ФОН
-    start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
+    start_screen_image = transform.scale(image.load('./assets/start_screen.jpg'), (WIDTH, HEIGHT))
     start_time = tm()
 
     # DEFAULT VALUE

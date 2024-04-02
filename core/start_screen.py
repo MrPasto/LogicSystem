@@ -1,6 +1,6 @@
 from pygame import *
-from config import *
-from classes import Label, Rectangle
+from LogicSystem.core.config import *
+from LogicSystem.core.classes import Label, Rectangle
 
 
 # ФУНКЦИЯ ЗАПУСКАЕТ СТАРТОВОЕ ОКНО
@@ -32,7 +32,7 @@ def start_screen():
     x, y, x_pos, y_pos = 0, 0, 0, 0
 
     # ФОН
-    start_screen_image = transform.scale(image.load('assets/start_screen.jpg'), (WIDTH, HEIGHT))
+    start_screen_image = transform.scale(image.load('./assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
     run = True
     while run:
