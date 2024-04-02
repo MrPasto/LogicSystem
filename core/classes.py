@@ -1,5 +1,5 @@
 from pygame import *
-from LogicSystem.core.config import *
+from core.config import *
 
 
 class Label:

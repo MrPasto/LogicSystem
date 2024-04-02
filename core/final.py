@@ -1,6 +1,6 @@
 from pygame import *
-from LogicSystem.core.config import *
-from LogicSystem.core.classes import Label
+from core.config import *
+from core.classes import Label
 
 
 def final_window(seconds, gamemode_number):

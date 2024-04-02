@@ -1,6 +1,6 @@
 from pygame import *
-from LogicSystem.core.config import *
-from LogicSystem.core.classes import Label, Rectangle
+from core.config import *
+from core.classes import Label, Rectangle
 
 
 # ФУНКЦИЯ ЗАПУСКАЕТ СТАРТОВОЕ ОКНО

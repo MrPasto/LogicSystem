@@ -1,7 +1,7 @@
 from pygame import *
-from LogicSystem.core.config import *
-from LogicSystem.core.classes import Label, Rectangle
-from LogicSystem.core.games import game_1, game_2, game_3
+from core.config import *
+from core.classes import Label, Rectangle
+from core.games import game_1, game_2, game_3
 
 
 # ФУНКЦИЯ ЗАПУСКАЕТ МЕНЮ ВЫБОРА ИГРЫ
