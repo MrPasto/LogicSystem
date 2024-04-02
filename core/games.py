@@ -1,8 +1,8 @@
 from pygame import *
 from random import sample, shuffle, randint
 from time import time as tm
-from LogicSystem.core.config import *
-from LogicSystem.core.classes import Label, Rectangle, GameButton
+from core.config import *
+from core.classes import Label, Rectangle, GameButton
 
 cheats = False
 

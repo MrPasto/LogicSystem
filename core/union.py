@@ -1,7 +1,7 @@
-from LogicSystem.core.start_screen import start_screen
-from LogicSystem.core.choice_gamemode import first, second
-from LogicSystem.core.games import game_1, game_2, game_3
-from LogicSystem.core.final import final_window
+from core.start_screen import start_screen
+from core.choice_gamemode import first, second
+from core.games import game_1, game_2, game_3
+from core.final import final_window
 from datetime import datetime
 
 
