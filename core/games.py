@@ -346,6 +346,7 @@ def game_2(diff):
             if but.collidepoint(x_click, y_click) and not but.is_found and \
                     not but.is_pressed and len(clicked_buttons) < 2:
                 if not start:
+                    start_time = tm()
                     calculate_time = start = True
                 if wait <= 0 and len(clicked_buttons) == 1:
                     wait = tm()
