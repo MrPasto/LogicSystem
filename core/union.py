@@ -35,6 +35,7 @@ def union_functions():
             with open('./result.txt', 'a+', encoding='utf-8') as file:
                 file.write(
                     f'{datetime.now():%d.%m.%Y %H:%M:%S}\n'
+                    f'Уровень сложности: {difficult};\n'
                     f'Первая игра - {again[-1][0]} секунд,\n'
                     f'Вторая игра - {again[-1][1]} секунд,\n'
                     f'Третья игра - {again[-1][2]} секунд,\n'
