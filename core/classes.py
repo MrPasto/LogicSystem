@@ -64,12 +64,12 @@ class Rectangle:
         if self.picture:
             self.picture = transform.scale(image.load(self.picture), self.x_size, self.y_size)
 
-    def draw(self, screen, color_, color_border=BLACK):
+    def draw(self, screen, color_, color_border=BLACK, width_border=10):
         if self.picture:
             screen.blit(self.picture, (self.rect.x, self.rect.y))
         else:
             draw.rect(screen, color_, self.rect, 0, self.radius)
-            draw.rect(screen, color_border, self.rect, 10, self.radius)
+            draw.rect(screen, color_border, self.rect, width_border, self.radius)
 
     def collidepoint(self, x, y):
         return self.rect.collidepoint(x, y)

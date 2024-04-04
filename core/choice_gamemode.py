@@ -108,15 +108,15 @@ def first():
         display.update()
 
 
-def second():
+def second(diff):
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
     display.set_caption('Nice game')
     clock = time.Clock()
-    game1_seconds = game_1()
+    game1_seconds = game_1(diff)
     if game1_seconds:
-        game2_seconds = game_2()
+        game2_seconds = game_2(diff)
         if game2_seconds:
-            game3_seconds = game_3()
+            game3_seconds = game_3(diff)
             return game1_seconds, game2_seconds, game3_seconds

@@ -1,6 +1,6 @@
 from core.start_screen import start_screen
 from core.choice_gamemode import first, second
-from core.games import game_1, game_2, game_3
+from core.games import game_1, game_2, game_3, choice_difficult
 from core.final import final_window
 from datetime import datetime
 
@@ -17,14 +17,19 @@ def union_functions():
         window2 = choice_window1[window1]
         window3 = window2()
         window4 = choice_window3[window3]
-        seconds = window4()
+        if window4 == game_1 or window4 == game_2 or window4 == game_3:
+            difficult = choice_difficult()
+            seconds = window4(difficult)
+        elif window4 == union_functions:
+            seconds = window4()
         if type(seconds) == str:
             print('final show')
             again = final_window(seconds, 0)
             if again:
                 union_functions()
     elif window1 == 1:
-        seconds = second()
+        difficult = choice_difficult()
+        seconds = second(difficult)
         if seconds:
             again = final_window(seconds, 1)
             with open('./result.txt', 'a+', encoding='utf-8') as file:
