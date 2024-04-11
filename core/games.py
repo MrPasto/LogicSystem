@@ -38,9 +38,10 @@ def choice_difficult():
 
         for ev in event.get():
             # ВЫКЛЮЧЕНИЕ
-            if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
-                run = False
-                return False
+            if ev.type == QUIT:
+                return None
+            if ev.type == KEYDOWN and ev.key == K_ESCAPE:
+                return 5
             # ОТСЛЕЖИВАНИЕ МЫШИ
             if ev.type == MOUSEMOTION:
                 x, y = ev.pos
@@ -159,7 +160,7 @@ def game_1(diff, cheats):
 
         for ev in event.get():
             # ВЫКЛЮЧЕНИЕ
-            if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
+            if ev.type == QUIT:
                 run = False
                 return False
             # ОТСЛЕЖИВАНИЕ МЫШИ
@@ -313,7 +314,7 @@ def game_2(diff, cheats):
 
         for ev in event.get():
             # ВЫКЛЮЧЕНИЕ
-            if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
+            if ev.type == QUIT:
                 run = False
                 return False
             # ОТСЛЕЖИВАНИЕ МЫШИ
@@ -515,7 +516,7 @@ def game_3(diff, cheats):
 
         for ev in event.get():
             # ВЫКЛЮЧЕНИЕ
-            if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
+            if ev.type == QUIT:
                 run = False
                 return False
             # ОТСЛЕЖИВАНИЕ МЫШИ

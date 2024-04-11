@@ -1,11 +1,10 @@
 from pygame import *
 from core.config import *
 from core.classes import Label, Rectangle
-from core.games import game_1, game_2, game_3
 
+# ПРАВИЛА ИГРЫ
 
-# ФУНКЦИЯ ЗАПУСКАЕТ МЕНЮ ВЫБОРА ИГРЫ
-def first():
+def rules():
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
@@ -20,12 +19,8 @@ def first():
                Rectangle(x=x2, y=y2, x_size=sx2, y_size=sy2, relative_cntr_x=True, relative_cntr_y=True),
                Rectangle(x=x3, y=y3, x_size=sx3, y_size=sy3, relative_cntr_x=True, relative_cntr_y=True), ]
 
-    x5, y5, sx5, sy5 = 0, 550, 300, 125
-    choice_button = Rectangle(x=x5, y=y5, x_size=sx5, y_size=sy5, relative_cntr_x=True)
-    label_choice_game = Label(text='Выбрать', rect_=choice_button, font_size=70, font_='robo')
-
     label_rect = Rectangle(x=250, y=5, x_size=500, y_size=100)
-    label_choice = Label(text='Выберите игру', font_size=70, font_='robo')
+    label_choice = Label(text='Правила игры', font_size=70, font_='robo')
 
     labels_game = [
         Label(text='Игра на//внима-//тельность', rect_=buttons[0], font_size=70, font_='robo'),
@@ -41,8 +36,6 @@ def first():
     # ФОН
     choose_screen_image = transform.scale(image.load('./assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
-    choice_string = ''
-
     # ИГРОВОЙ ЦИКЛ
     run = True
     while run:
@@ -51,10 +44,8 @@ def first():
 
         for ev in event.get():
             # ВЫХОД
-            if ev.type == QUIT:
+            if ev.type == QUIT or ev.type == KEYDOWN and ev.key == K_ESCAPE:
                 return None
-            if ev.type == KEYDOWN and ev.key == K_ESCAPE:
-                return 5
             # ОТСЛЕЖИВАНИЕ МЫШИ
             if ev.type == MOUSEMOTION:
                 x, y = ev.pos
@@ -79,46 +70,16 @@ def first():
                 button_exit.draw(screen, GRAY)
                 label_exit.draw_text(screen, color_=LIGHT_GRAY, position=(73, HEIGHT - 55))
 
-        if choice_string:
-            if choice_button.collidepoint(x, y):
-                choice_button.draw(screen, DARK_ORANGE)
-            else:
-                choice_button.draw(screen, ORANGE)
-            label_choice_game.draw_text(screen, color_=BLACK, position=(0, 705), cntr_x=True)
-
-            if choice_button.collidepoint(x_click, y_click):
-                return int(choice_string[-1])
-
         # НАЖАТИЯ ПО КНОПКАМ
         for i, but in enumerate(buttons):
             if but.collidepoint(x_click, y_click):
-                choice_string += str(i + 1)
                 x_click, y_click = 0, 0
-                button_pressed = but
-
-        try:
-            button_pressed.draw(screen, LIGHT_GREEN)
-        except UnboundLocalError:
-            ...
-        for i, button in enumerate(buttons):
-            labels_game[i].draw_text(screen, color_=BLACK,
-                                     position=(button.rect.x + 20, button.rect.y + 20), cntr_x=True)
 
         if button_exit.collidepoint(x_click, y_click):
             return 5
 
+        for i, button in enumerate(buttons):
+            labels_game[i].draw_text(screen, color_=BLACK,
+                                     position=(button.rect.x + 20, button.rect.y + 20), cntr_x=True)
+
         display.update()
-
-
-def second(diff, cheats):
-    init()
-
-    screen = display.set_mode(SCREEN_SIZE)
-    display.set_caption('Nice game')
-    clock = time.Clock()
-    game1_seconds = game_1(diff, cheats)
-    if game1_seconds:
-        game2_seconds = game_2(diff, cheats)
-        if game2_seconds:
-            game3_seconds = game_3(diff, cheats)
-            return game1_seconds, game2_seconds, game3_seconds
