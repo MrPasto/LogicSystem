@@ -3,6 +3,7 @@ from core.config import *
 from core.classes import Label, Rectangle
 
 
+
 # ФУНКЦИЯ ЗАПУСКАЕТ СТАРТОВОЕ ОКНО
 def start_screen():
     init()
@@ -34,6 +35,8 @@ def start_screen():
     # ФОН
     start_screen_image = transform.scale(image.load('./assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
+    cheats = False
+    local_color = BLACK
     run = True
     while run:
         screen.blit(start_screen_image, (0, 0))
@@ -48,27 +51,35 @@ def start_screen():
                 x, y = ev.pos
             if ev.type == MOUSEMOTION:
                 x_pos, y_pos = ev.pos
+            if ev.type == KEYDOWN and ev.key == K_1 and key.get_mods() & KMOD_SHIFT:
+                cheats = True
+                local_color = CHEATS_ON_COLOR
+            if ev.type == KEYDOWN and ev.key == K_0 and key.get_mods() & KMOD_SHIFT:
+                cheats = False
+                local_color = BLACK
+
 
         # ОТРИСОВКА
         # ПРИ НАВЕДЕНИИ НА КНОПКУ ОНА МЕНЯЕТ ЦВЕТ
+
         if button1.collidepoint(x_pos, y_pos):
-            button1.draw(screen, DARK_YELLOW)
+            button1.draw(screen, DARK_YELLOW, color_border=local_color)
         else:
-            button1.draw(screen, YELLOW)
+            button1.draw(screen, YELLOW, color_border=local_color)
 
         if button2.collidepoint(x_pos, y_pos):
-            button2.draw(screen, DARK_ORANGE)
+            button2.draw(screen, DARK_ORANGE, color_border=local_color)
         else:
-            button2.draw(screen, ORANGE)
+            button2.draw(screen, ORANGE, color_border=local_color)
 
         if button_exit.collidepoint(x_pos, y_pos):
             button_exit.draw(screen, DARK_RED, color_border=GRAY)
             label_exit.draw_text(screen, color_=LIGHT_GRAY, position=(73, HEIGHT - 55))
         else:
-            button_exit.draw(screen, RED)
+            button_exit.draw(screen, RED, color_border=local_color)
             label_exit.draw_text(screen, color_=BLACK, position=(73, HEIGHT - 55))
 
-        label_rect.draw(screen, WHITE)
+        label_rect.draw(screen, WHITE, color_border=local_color)
         label_game.draw_text(screen, color_=BLACK, position=(0, 85), cntr_x=True)
         label_authors.draw_text(screen, color_=BLACK, position=(WIDTH - 650, HEIGHT - 50))
         bt1_label.draw_text(screen, color_=BLACK, position=(0, 275), cntr_x=True)
@@ -76,10 +87,10 @@ def start_screen():
 
         # НАЖАТИЯ ПО КНОПКАМ
         if button1.collidepoint(x, y):
-            return 0
+            return 0, cheats
 
         if button2.collidepoint(x, y):
-            return 1
+            return 1, cheats
 
         if button_exit.collidepoint(x, y):
             return None

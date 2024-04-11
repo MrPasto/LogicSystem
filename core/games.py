@@ -4,8 +4,6 @@ from time import time as tm
 from core.config import *
 from core.classes import Label, Rectangle, GameButton
 
-cheats = False
-
 
 # ФУНКЦИЯ ВЫБОРА УРОВНЯ СЛОЖНОСТИ
 def choice_difficult():
@@ -83,7 +81,7 @@ def choice_difficult():
 
 
 # ФУНКЦИЯ ЗАПУСКАЕТ ИГРУ 1
-def game_1(diff):
+def game_1(diff, cheats):
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
@@ -225,7 +223,7 @@ def game_1(diff):
 
 
 # ФУНКЦИЯ ЗАПУСКАЕТ ИГРУ 2
-def game_2(diff):
+def game_2(diff, cheats):
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
@@ -381,7 +379,7 @@ def game_2(diff):
 
 
 # ФУНКЦИЯ ЗАПУСКАЕТ ИГРУ 3
-def game_3(diff):
+def game_3(diff, cheats):
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
