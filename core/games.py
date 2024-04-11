@@ -1,5 +1,5 @@
 from pygame import *
-from random import sample, shuffle, randint
+from random import sample, shuffle, randint, choice
 from time import time as tm
 from core.config import *
 from core.classes import Label, Rectangle, GameButton
@@ -49,7 +49,6 @@ def choice_difficult():
             if ev.type == MOUSEBUTTONDOWN and ev.button == 1:
                 x_click, y_click = ev.pos
 
-
         # ОТРИСОВКА
         label_rect.draw(screen, WHITE)
         label_game.draw_text(screen, BLACK, position=(0, 60), cntr_x=True)
@@ -65,12 +64,11 @@ def choice_difficult():
         if buttons[2].collidepoint(x, y):
             buttons[2].color = RED
 
-
         buttons[0].draw(screen, buttons[0].color, color_border=BLACK)
         buttons[1].draw(screen, buttons[1].color, color_border=BLACK)
         buttons[2].draw(screen, buttons[2].color, color_border=BLACK)
 
-        level1_txt.draw_text(screen, BLACK, position=(0,238), cntr_x=True)
+        level1_txt.draw_text(screen, BLACK, position=(0, 238), cntr_x=True)
         level2_txt.draw_text(screen, BLACK, position=(0, 438), cntr_x=True)
         level3_txt.draw_text(screen, BLACK, position=(0, 638), cntr_x=True)
 
@@ -104,7 +102,7 @@ def game_1(diff):
         count = 5
         buttons = [GameButton(x=(200 + i * 115), y=(150 + j * 115), x_size=120, y_size=120)
                    for j in range(count) for i in range(count)]
-        nums:list = sample(range(1, count ** 2 + 1), count ** 2)
+        nums: list = sample(range(1, count ** 2 + 1), count ** 2)
         for but in range(count ** 2):
             buttons[but].num = nums[but]
             buttons[but].is_used = False
@@ -140,7 +138,7 @@ def game_1(diff):
     start_screen_image = transform.scale(image.load('./assets/start_screen.jpg'), (WIDTH, HEIGHT))
 
     x, y = 0, 0
-    actually_num = count*count-1 if cheats else 1
+    actually_num = count * count - 1 if cheats else 1
     if cheats:
         print(f'{actually_num=}')
     seconds: str = ''
@@ -214,9 +212,11 @@ def game_1(diff):
         else:
             for but in range(count ** 2):
                 if 10 <= nums[but] < 100:
-                    label_nums[but].draw_text(screen, color_=BLACK, position=(buttons[but].x + 25, buttons[but].y + 32.5))
+                    label_nums[but].draw_text(screen, color_=BLACK,
+                                              position=(buttons[but].x + 25, buttons[but].y + 32.5))
                 elif 0 <= nums[but] < 10:
-                    label_nums[but].draw_text(screen, color_=BLACK, position=(buttons[but].x + 40, buttons[but].y + 32.5))
+                    label_nums[but].draw_text(screen, color_=BLACK,
+                                              position=(buttons[but].x + 40, buttons[but].y + 32.5))
 
         if actually_num == count ** 2 + 1:
             return seconds
@@ -443,7 +443,17 @@ def game_3(diff):
             if diff == 'easy':
                 signs: list = ['+', '-']
                 current_sign: str = signs[randint(0, 1)]
-                nums: list = sorted([randint(1, 50), randint(1, 50)], reverse=True)
+
+                if current_sign == '+':
+                    nums: list = sorted([randint(1, 50), randint(1, 50)])
+                    while int(str(nums[0])[-1]) + int(str(nums[1])[-1]) > 10:
+                        nums: list = sorted([randint(1, 50), randint(1, 50)])
+
+                if current_sign == '-':
+                    nums: list = sorted([randint(1, 50), randint(1, 50)], reverse=True)
+                    while int(str(nums[0])[-1]) < int(str(nums[1])[-1]):
+                        nums: list = sorted([randint(1, 50), randint(1, 50)], reverse=True)
+
                 answer: int = eval(f'{nums[0]}{current_sign}{nums[1]}')
                 expression: Label = Label(text=f'{nums[0]} {current_sign} {nums[1]} = ', font_size=140,
                                           font_='Arial Narrow')
@@ -457,9 +467,17 @@ def game_3(diff):
                 signs: list = ['+', '-', '*']
                 current_sign: str = signs[randint(0, 2)]
                 if current_sign == '*':
-                    nums: list = [randint(1, 25), randint(0, 3)]
-                else:
+                    nums: list = [choice([0, 1, 2, 3, 4, 5, 6, 7, 10]), choice([0, 1, 2, 3, 4, 5, 6, 7, 10])]
+                if current_sign == '+':
+                    nums: list = sorted([randint(30, 100), randint(1, 100)])
+                    while int(str(nums[0])[-1]) + int(str(nums[1])[-1]) > 10:
+                        nums: list = sorted([randint(30, 100), randint(1, 100)])
+
+                if current_sign == '-':
                     nums: list = sorted([randint(30, 100), randint(1, 100)], reverse=True)
+                    while int(str(nums[0])[-1]) < int(str(nums[1])[-1]):
+                        nums: list = sorted([randint(30, 100), randint(1, 100)], reverse=True)
+
                 answer: int = eval(f'{nums[0]}{current_sign}{nums[1]}')
                 expression: Label = Label(text=f'{nums[0]} {current_sign} {nums[1]} = ', font_size=140,
                                           font_='Arial Narrow')
@@ -484,7 +502,6 @@ def game_3(diff):
                 else:
                     variants: list = [answer, answer + randint(1, 7), answer - randint(1, 5), answer - randint(1, 10)]
                 shuffle(variants)
-
 
             buttons: list = [
                 GameButton(x=(140 + i * 180), y=500, x_size=180, y_size=180, is_radius=False, is_found=False)
