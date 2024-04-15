@@ -208,7 +208,7 @@ def game_1(diff, cheats):
                     label_nums[but].draw_text(screen, color_=BLACK, position=(buttons[but].x + 20, buttons[but].y + 26))
                 elif 0 <= nums[but] < 10:
                     label_nums[but].draw_text(screen, color_=BLACK, position=(buttons[but].x + 34, buttons[but].y + 26))
-        else:
+        elif diff == 'normal':
             for but in range(count ** 2):
                 if 10 <= nums[but] < 100:
                     label_nums[but].draw_text(screen, color_=BLACK,

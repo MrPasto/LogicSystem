@@ -10,7 +10,7 @@ def none():
     return None
 
 
-def union_functions():
+def union_functions() -> None:
     choice_window1 = {0: first, 1: none, 2: rules, None: none}
     choice_window3 = {1: game_1, 2: game_2, 3: game_3, 4: none, 5: union_functions, None: none}
     window1 = start_screen()
@@ -53,9 +53,8 @@ def union_functions():
                 union_functions()
 
     elif window1[0] == 2:
-        aboba = rules()
-        if aboba == 5:
-            seconds = union_functions()
+        if rules() == 5:
+            union_functions()
 
 
 def main():

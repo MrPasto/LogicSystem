@@ -3,7 +3,6 @@ from core.config import *
 from core.classes import Label, Rectangle
 
 
-
 # ФУНКЦИЯ ЗАПУСКАЕТ СТАРТОВОЕ ОКНО
 def start_screen():
     init()
@@ -23,7 +22,7 @@ def start_screen():
     # КНОПКИ ВЫБРАТЬ ИГРУ и ПРОЙТИ ТЕСТИРОВАНИЕ
     x1, y1, sx1, sy1 = WIDTH // 2 - 350, 160, 700, 160
     x2, y2, sx2, sy2 = WIDTH // 2 - 350, 340, 700, 160
-    x3, y3, sx3, sy3 = WIDTH // 2 - 350, 520, 700, 160
+    x3, y3, sx3, sy3 = WIDTH // 2 - 250, 520, 500, 120
     button1 = Rectangle(x=x1, y=y1, x_size=sx1, y_size=sy1)
     button2 = Rectangle(x=x2, y=y2, x_size=sx2, y_size=sy2)
     button3 = Rectangle(x=x3, y=y3, x_size=sx3, y_size=sy3)
@@ -31,7 +30,7 @@ def start_screen():
 
     bt1_label = Label(text='Выбрать игру', font_size=85, font_='Arial Narrow')
     bt2_label = Label(text='Пройти тестирование', font_size=85, font_='Arial Narrow')
-    bt3_label = Label(text='Правила игры', font_size=85, font_='Arial Narrow')
+    bt3_label = Label(text='Как играть', font_size=70, font_='Arial Narrow')
     label_exit = Label(text='Выйти', font_size=40, font_='Arial Narrow')
     x, y, x_pos, y_pos = 0, 0, 0, 0
 
@@ -60,7 +59,6 @@ def start_screen():
             if ev.type == KEYDOWN and ev.key == K_0 and key.get_mods() & KMOD_SHIFT:
                 cheats = False
                 local_color = BLACK
-
 
         # ОТРИСОВКА
         # ПРИ НАВЕДЕНИИ НА КНОПКУ ОНА МЕНЯЕТ ЦВЕТ
@@ -92,7 +90,7 @@ def start_screen():
         label_authors.draw_text(screen, color_=BLACK, position=(WIDTH - 650, HEIGHT - 50))
         bt1_label.draw_text(screen, color_=BLACK, position=(0, 240), cntr_x=True)
         bt2_label.draw_text(screen, color_=BLACK, position=(0, 420), cntr_x=True)
-        bt3_label.draw_text(screen, color_=BLACK, position=(0, 600), cntr_x=True)
+        bt3_label.draw_text(screen, color_=BLACK, position=(0, 580), cntr_x=True)
 
         # НАЖАТИЯ ПО КНОПКАМ
         if button1.collidepoint(x, y):
