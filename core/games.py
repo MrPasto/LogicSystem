@@ -10,7 +10,7 @@ def choice_difficult():
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
-    display.set_caption('Nice game')
+    display.set_caption('Logic System')
     clock = time.Clock()
 
     # ЗАГОЛОВОК
@@ -86,7 +86,7 @@ def game_1(diff, cheats):
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
-    display.set_caption('Nice game')
+    display.set_caption('Logic System')
     clock = time.Clock()
 
     # ЗАГОЛОВОК
@@ -228,7 +228,7 @@ def game_2(diff, cheats):
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
-    display.set_caption('Nice game')
+    display.set_caption('Logic System')
     clock = time.Clock()
 
     # ЗАГОЛОВОК
@@ -384,7 +384,7 @@ def game_3(diff, cheats):
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
-    display.set_caption('Nice game')
+    display.set_caption('Logic System')
     clock = time.Clock()
 
     # ЗАГОЛОВОК
