@@ -8,7 +8,7 @@ def start_screen():
     init()
 
     screen = display.set_mode(SCREEN_SIZE)
-    display.set_caption('Nice game')
+    display.set_caption('Logic System')
     clock = time.Clock()
 
     # ЗАГОЛОВОК
